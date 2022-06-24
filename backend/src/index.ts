@@ -1,7 +1,8 @@
 // Import express from module
-import express, {Request, Response, NextFunction} from "express";
+import express, { Request, Response, NextFunction } from "express";
+import { userRouter } from "./routers/userRouter";
 
-import { rootRouter } from "routers/rootRouter";
+import { rootRouter } from "./routers/rootRouter";
 
 class Server {
     private app: express.Application;
@@ -25,7 +26,7 @@ class Server {
     // define api req/res route
     routers(): void {
         this.app.use("/", rootRouter);
-
+        this.app.use("/user", userRouter);
         this.app.use((req: Request, res: Response, next: NextFunction) => {
             res.status(404);
             res.end("Not Found in : " + req.path);
@@ -38,6 +39,8 @@ class Server {
         try {
             this.app.listen(this.port, () => {
                 console.log("✅ This server is listening on port " + this.port);
+                console.log("http://localhost:" + this.port);
+
             });
         } catch (error) {
             console.error("🚫 Some error has occurred. \n", error);
