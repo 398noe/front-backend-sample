@@ -1,0 +1,18 @@
+{
+  "name": "backend",
+  "version": "0.1.0",
+  "description": "This is sample of backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "npx ts-node ./src/index.ts",
+    "run" : "node ./dist/index.js",
+    "build" : "npx tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4"
+  }
+}
