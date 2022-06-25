@@ -5,10 +5,9 @@
    "main": "index.js",
    "scripts": {
       "dev": "npx nodemon",
-      "run": "node ./dist/index.js",
+      "start": "node ./dist/index.js",
       "build": "npx tsc",
-      "typeorm": "typeorm-ts-node-commonjs",
-      "start": "ts-node src/index.ts"
+      "typeorm": "typeorm-ts-node-commonjs"
    },
    "author": "",
    "license": "ISC",
