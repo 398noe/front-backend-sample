@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { ulid } from "ulid";
 import { Request, Response } from "express";
 import { Repository } from "typeorm";
@@ -52,6 +53,8 @@ export const create = async (req: Request, res: Response) => {
         res.json(generateMessage(userData, "ok"));
     } catch (error) {
         res.status(400);
+        console.log(error);
+        
         res.json(generateMessage("Some error has occured", "err"))
     }
 }
@@ -82,6 +85,6 @@ export const destroy = async (req: Request, res: Response) => {
 
 const generateMessage = (data: any, status: string): Message => {
     return {
-        data, status, date: new Date().toDateString()
+        data, status, date: new Date().toISOString()
     }
 }
