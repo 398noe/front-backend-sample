@@ -9,6 +9,7 @@ const config: DataSourceOptions = {
     logging: true,
     entities: [User],
     migrations: ["src/migration/**/*.ts"],
+    migrationsTableName: "migration_table"
 }
 
 export const db = new DataSource(config);
