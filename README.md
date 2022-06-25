@@ -4,6 +4,7 @@
 ### npm install
 `npm install`
 ### Create SQLite Database
+**SQLite Install is required!**
 `sqlite3 database/database.sqlite3`
 ### Execute Migration Command before start
 `npx typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts`
