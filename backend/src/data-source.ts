@@ -1,15 +1,17 @@
-import { DataSource } from "typeorm";
-import { User } from "./entity/User";
+import "reflect-metadata"
+import { DataSource, DataSourceOptions } from "typeorm"
+import { User } from "./entity/User"
 
-export const db = new DataSource({
+const config: DataSourceOptions = {
     type: "sqlite",
     database: "./database/database.sqlite3",
     synchronize: true,
     logging: true,
-    entities: [
-        User
-    ]
-});
+    entities: [User],
+    migrations: ["src/migration/**/*.ts"],
+}
+
+export const db = new DataSource(config);
 
 db.initialize()
     .then(() => {

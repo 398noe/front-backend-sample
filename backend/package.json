@@ -1,27 +1,29 @@
 {
-  "name": "backend",
-  "version": "0.1.0",
-  "description": "This is sample of backend",
-  "main": "index.js",
-  "scripts": {
-    "dev": "npx nodemon",
-    "run": "node ./dist/index.js",
-    "build": "npx tsc"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@types/node": "^18.0.0",
-    "nodemon": "^2.0.18",
-    "ts-node": "^10.8.1",
-    "typescript": "^4.7.4"
-  },
-  "dependencies": {
-    "express": "^4.18.1",
-    "reflect-metadata": "^0.1.13",
-    "sqlite3": "^5.0.8",
-    "typeorm": "^0.3.6",
-    "ulid": "^2.3.0"
-  }
+   "name": "backend",
+   "version": "0.1.0",
+   "description": "This is sample of backend",
+   "main": "index.js",
+   "scripts": {
+      "dev": "npx nodemon",
+      "run": "node ./dist/index.js",
+      "build": "npx tsc",
+      "typeorm": "typeorm-ts-node-commonjs",
+      "start": "ts-node src/index.ts"
+   },
+   "author": "",
+   "license": "ISC",
+   "devDependencies": {
+      "@types/express": "^4.17.13",
+      "@types/node": "^16.11.10",
+      "nodemon": "^2.0.18",
+      "ts-node": "10.7.0",
+      "typescript": "4.5.2"
+   },
+   "dependencies": {
+      "express": "^4.18.1",
+      "reflect-metadata": "^0.1.13",
+      "sqlite3": "^5.0.8",
+      "typeorm": "0.3.6",
+      "ulid": "^2.3.0"
+   }
 }

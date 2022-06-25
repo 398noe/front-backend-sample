@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { ulid } from "ulid";
 import { Request, Response } from "express";
 import { Repository } from "typeorm";
-import { db } from "../database";
+import { db } from "../data-source";
 import { User } from "../entity/User";
 import { Message, UserData } from "../types";
 
@@ -12,8 +12,7 @@ export const read = async (req: Request, res: Response) => {
         const id = req.body.id as string;
         // if body is not exist, return error
         if (id == null) {
-            res.status(404);
-            res.json(generateMessage("id is not found in request body", "err"));
+            return res.status(404).json(generateMessage("id is not found in request body", "err"));
         }
 
         const userRepository = db.getRepository(User);
@@ -21,15 +20,12 @@ export const read = async (req: Request, res: Response) => {
 
         // If userdata is not exist
         if (userData == null) {
-            res.status(404);
-            res.json(generateMessage("Not found with id: " + req.body.id, "err"));
+            return res.status(404).json(generateMessage("Not found with id: " + req.body.id, "err"));
         }
         
-        res.status(200);
-        res.json(generateMessage(userData, "ok"));
+        return res.status(200).json(generateMessage(userData, "ok"));
     } catch (error) {
-        res.status(400);
-        res.json(generateMessage("Some error has occurred", "err"))
+        return res.status(400).json(generateMessage("Some error has occurred", "err"))
     }
 }
 
@@ -52,10 +48,7 @@ export const create = async (req: Request, res: Response) => {
         res.status(200);
         res.json(generateMessage(userData, "ok"));
     } catch (error) {
-        res.status(400);
-        console.log(error);
-        
-        res.json(generateMessage("Some error has occured", "err"))
+        return res.status(400).json(generateMessage("Some error has occured", "err"))
     }
 }
 
@@ -63,23 +56,19 @@ export const destroy = async (req: Request, res: Response) => {
     try {
         const id: string = req.body.id as string;
         if(id == null) {
-            res.status(400);
-            res.json(generateMessage("id is not found in request body", "err"));
+            return res.status(400).json(generateMessage("id is not found in request body", "err"));
         }
         const userRepository = db.getRepository(User);
         const userData = await userRepository.findOneBy({id});
         
         if(userData == null) {
-            res.status(404);
-            res.json(generateMessage("Not found with id: ", id))
+            return res.status(404).json(generateMessage("Not found with id: " + id, id))
         }
 
         await userRepository.delete({id});
-        res.status(200);
-        res.json(generateMessage("User deleted successfully", "ok"));
+        return res.status(200).json(generateMessage("User deleted successfully", "ok"));
     } catch (error) {
-        res.status(400);
-        res.json(generateMessage("Some error has occured", "err"));
+        return res.status(400).json(generateMessage("Some error has occured", "err"));
     }
 }
 

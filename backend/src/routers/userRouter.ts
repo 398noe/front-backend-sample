@@ -16,3 +16,10 @@ userRouter.post(
         create(req, res);
     }
 )
+
+userRouter.delete(
+    "/",
+    (req: Request, res: Response) => {
+        destroy(req, res);
+    }
+)
