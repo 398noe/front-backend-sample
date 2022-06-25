@@ -25,7 +25,7 @@ class Server {
     // define api req/res route
     routers(): void {
         this.app.use("/", rootRouter);
-        this.app.use("/user", userRouter);
+        this.app.use("/api/user", userRouter);
         this.app.use((req: Request, res: Response, next: NextFunction) => {
             res.status(404);
             res.end("Not Found in : " + req.path);
