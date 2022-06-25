@@ -1,7 +1,6 @@
 // Import express from module
 import express, { Request, Response, NextFunction } from "express";
 import { userRouter } from "./routers/userRouter";
-
 import { rootRouter } from "./routers/rootRouter";
 
 class Server {
