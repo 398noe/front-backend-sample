@@ -3,7 +3,7 @@
 # Setup
 ### Create SQLite Database
 sqlite3 database/database.sqlite3
-# Migration Command
+### Execute Migration Command before start
 npx typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts
 
 ## Memo
