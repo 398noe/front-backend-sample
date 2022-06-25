@@ -1,13 +1,13 @@
 import { DataSource } from "typeorm";
 
-export const database = new DataSource({
+export const db = new DataSource({
     type: "sqlite",
     database: "database/database.sqlite3",
     synchronize: true,
     logging: true
 });
 
-database.initialize()
+db.initialize()
     .then(() => {
         console.log("Data Source has been initialized");        
     })
