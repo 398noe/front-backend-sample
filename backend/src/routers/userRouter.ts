@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { create, read, destroy } from "../controllers/userController";
+import { create, read, destroy, update } from "../controllers/userController";
 
 export const userRouter = Router();
 
@@ -15,6 +15,13 @@ userRouter.post(
     (req: Request, res: Response) => {
         create(req, res);
     }
+);
+
+userRouter.post(
+    "/",
+    (req: Request, res: Response) => {
+        update(req, res);
+    }
 )
 
 userRouter.delete(
@@ -22,4 +29,4 @@ userRouter.delete(
     (req: Request, res: Response) => {
         destroy(req, res);
     }
-)
+);
