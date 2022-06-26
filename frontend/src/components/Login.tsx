@@ -1,4 +1,4 @@
-import { Flex, Box, FormControl, FormLabel, Input, Checkbox, Stack, Link, Button, Heading, Text, useColorModeValue, Alert, AlertDescription, AlertIcon, AlertTitle } from '@chakra-ui/react';
+import { Flex, Box, FormControl, FormLabel, Input, Stack, Button, useColorModeValue, Alert, AlertIcon, AlertTitle } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
@@ -22,7 +22,10 @@ const Login: React.FC = () => {
         console.log(id);
         try {
             const res = await client.user.get({ query: { id } });
+            // エラー状態を解除
             setIsError(false);
+            // UserDataにデータを渡す
+            setUserData(res.body.data)
         } catch (error) {
             setIsError(true);
         }
@@ -61,14 +64,6 @@ const Login: React.FC = () => {
                                 onClick={getUserData}
                             >
                                 データを取得
-                            </Button>
-                            <Button
-                                bg={'green.400'}
-                                color={'white'}
-                                _hover={{
-                                    bg: 'green.500',
-                                }}>
-                                新規登録
                             </Button>
                         </Stack>
                     </Stack>
