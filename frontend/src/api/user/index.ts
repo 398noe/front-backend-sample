@@ -2,7 +2,7 @@ import { Message, UserData } from '../../types';
 
 export type Methods = {
     get: {
-        reqBody: {
+        query: {
             id: string
         }
 

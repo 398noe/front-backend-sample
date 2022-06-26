@@ -9,7 +9,7 @@ import { Message, UserData } from "../types";
 export const read = async (req: Request, res: Response) => {
     try {
         // get id from body
-        const id = req.body.id as string;
+        const id = req.query.id as string;
         // if body is not exist, return error
         if (id == null) {
             return res.status(404).json(generateMessage("id is not found in request body", "err"));
@@ -20,7 +20,7 @@ export const read = async (req: Request, res: Response) => {
 
         // If userdata is not exist
         if (userData == null) {
-            return res.status(404).json(generateMessage("Not found with id: " + req.body.id, "err"));
+            return res.status(404).json(generateMessage("Not found with id: " + id, "err"));
         }
 
         return res.status(200).json(generateMessage(userData, "ok"));
