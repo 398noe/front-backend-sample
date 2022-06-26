@@ -4,13 +4,14 @@ import { useRecoilState } from 'recoil';
 import axios from 'axios';
 import aspida from "@aspida/axios";
 import api from "../api/$api";
-import { userDataState } from '../atom/userData';
+import { userDataState, userStatusState } from '../atom/userData';
 import { useForm } from 'react-hook-form';
 
 
 const Login: React.FC = () => {
     const [id, setId] = useState<string>("");
     const [userData, setUserData] = useRecoilState(userDataState);
+    const [userStatus, setUserStatus] = useRecoilState(userStatusState);
     const [isError, setIsError] = useState<boolean>(false);
 
     const {
@@ -53,6 +54,7 @@ const Login: React.FC = () => {
             setIsError(false);
             // UserDataにデータを渡す
             setUserData(res.body.data);
+            setUserStatus({...userStatus, isLogin: true});
             console.log(res.body.data);
         } catch (error) {
             setIsError(true);

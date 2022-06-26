@@ -10,3 +10,8 @@ export interface Message {
     status: string;
     date: string;
 }
+
+export interface UserStatus {
+    isLogin: boolean;
+    isRegister: boolean;
+}

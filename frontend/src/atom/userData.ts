@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { UserData } from "../types";
+import { UserData, UserStatus } from "../types";
 
 export const userDataState = atom<UserData>({
     key: "userDataState",
@@ -9,4 +9,13 @@ export const userDataState = atom<UserData>({
         age: 20,
         email: ""
     }
+});
+
+
+export const userStatusState = atom<UserStatus>({
+    key: "userStatusState",
+    default: {
+        isLogin: false,
+        isRegister: false
+    } 
 });
