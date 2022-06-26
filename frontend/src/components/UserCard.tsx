@@ -1,5 +1,5 @@
 import { Avatar, Image, Box, Button, Center, Flex, Input, useColorModeValue, Heading, Stack, InputGroup, InputRightAddon, NumberInput, NumberInputField } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useForm } from "react-hook-form";
 
@@ -40,6 +40,10 @@ const UserCard: React.FC = () => {
     const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserData({ ...userData, email: event.target.value });
     }
+
+    useEffect(() => {
+        setGravatarEmail(userData.email)
+    },[userData.email]);
 
     const saveEditing = () => {
         /**
@@ -84,7 +88,7 @@ const UserCard: React.FC = () => {
                 <Box p={6}>
                     {editing ? (
                         <Stack spacing={4} align={'center'} mb={5}>
-                            <Input variant="flushed"  placeholder="ユーザ名"
+                            <Input variant="flushed" placeholder="ユーザ名"
                                 {...register("name", { required: true, maxLength: 20 })}
                                 value={userData.name}
                                 onChange={handleName}
@@ -113,6 +117,9 @@ const UserCard: React.FC = () => {
                             <Heading fontSize={'2xl'} fontWeight={700} fontFamily={'body'}>
                                 {userData.name}
                             </Heading>
+                            <Heading fontSize={"xs"} color={"gray.500"} fontWeight={300} fontFamily={'body'}>
+                                {userData.id}
+                            </Heading>
                             <Heading fontSize={"lg"} fontWeight={300} fontFamily={"body"}>
                                 {userData.age}歳
                             </Heading>
@@ -131,7 +138,9 @@ const UserCard: React.FC = () => {
                             transform: 'translateY(-2px)',
                             boxShadow: 'lg',
                         }}
-                        onClick={saveEditing}
+                        onClick={handleSubmit((data) => {
+                            saveEditing();
+                        })}
                     >
                         {editing ? "保存する" : "編集する"}
                     </Button>
