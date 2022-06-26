@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 
 
 const Login: React.FC = () => {
-    const [id, setId] = useState<string>("");
     const [userData, setUserData] = useRecoilState(userDataState);
     const [userStatus, setUserStatus] = useRecoilState(userStatusState);
     const [isError, setIsError] = useState<boolean>(false);
@@ -74,6 +73,16 @@ const Login: React.FC = () => {
                     <Heading fontSize={'2xl'} textAlign={'center'}>
                         新規登録
                     </Heading>
+                    {   
+                        isError ? (
+                            <Alert status='error' maxW={"270px"}>
+                            <AlertIcon />
+                            <AlertTitle>エラーが発生しました</AlertTitle>
+                        </Alert>
+                        ) : (
+                            <></>
+                        )
+                    }
                     {
                         (errors.name) && (
                             <Alert status='error' maxW={"270px"}>

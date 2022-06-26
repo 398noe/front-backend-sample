@@ -1,6 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react';
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import './App.css';
 import { userStatusState } from './atom/userData';
 import Header from './components/Header';
@@ -10,7 +10,7 @@ import UserCard from './components/UserCard';
 import { UserStatus } from './types';
 
 const App: React.FC = () => {
-    const [userStatus, setUserStatus] = useRecoilState<UserStatus>(userStatusState);
+    const userStatus = useRecoilValue<UserStatus>(userStatusState);
 
     const View = () => {
         /**

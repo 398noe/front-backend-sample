@@ -1,7 +1,6 @@
-import { Avatar, Image, Box, Button, Center, Flex, Input, useColorModeValue, Heading, Stack, InputGroup, InputRightAddon, NumberInput, NumberInputField } from "@chakra-ui/react";
+import { Avatar, Image, Box, Button, Center, Flex, Input, useColorModeValue, Heading, Stack, InputGroup, InputRightAddon, NumberInput, NumberInputField, Alert, AlertIcon, AlertTitle } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { UserData } from "../types";
 import userBG from "../images/userBackground.jpg";
 import { calcMD5 } from "../util/calcMD5";
 import { useRecoilState } from "recoil";
@@ -76,7 +75,7 @@ const UserCard: React.FC = () => {
             try {
                 changeUserData();
                 setGravatarEmail(userData.email);
-                setEditing(false);                   
+                setEditing(false);
             } catch (error) {
                 // エラーが発生した場合編集画面から遷移させない
             }
@@ -115,6 +114,38 @@ const UserCard: React.FC = () => {
                 <Box p={6}>
                     {editing ? (
                         <Stack spacing={4} align={'center'} mb={5}>
+                            {
+                                isError ? (
+                                    <Alert status='error' maxW={"270px"}>
+                                        <AlertIcon />
+                                        <AlertTitle>エラーが発生しました</AlertTitle>
+                                    </Alert>
+                                ) : (<></>)
+                            }
+                            {
+                                (errors.name) && (
+                                    <Alert status='error' maxW={"270px"}>
+                                        <AlertIcon />
+                                        <AlertTitle>ユーザ名は20文字以下で入力してください</AlertTitle>
+                                    </Alert>
+                                )
+                            }
+                            {
+                                (errors.age) && (
+                                    <Alert status='error' maxW={"270px"}>
+                                        <AlertIcon />
+                                        <AlertTitle>年齢を入力してください</AlertTitle>
+                                    </Alert>
+                                )
+                            }
+                            {
+                                (errors.email) && (
+                                    <Alert status='error' maxW={"270px"}>
+                                        <AlertIcon />
+                                        <AlertTitle>メールアドレスを入力してください</AlertTitle>
+                                    </Alert>
+                                )
+                            }
                             <Input variant="flushed" placeholder="ユーザ名"
                                 {...register("name", { required: true, maxLength: 20 })}
                                 value={userData.name}

@@ -1,9 +1,7 @@
 import { Box, Button, Flex, Stack, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { FaGithub } from "react-icons/fa";
 import { MdLogin, MdLogout } from "react-icons/md";
 import { BsPlusSquare } from "react-icons/bs";
-import { useState } from "react";
 import { userStatusState } from "../atom/userData";
 import { useRecoilState } from "recoil";
 import { UserStatus } from "../types";

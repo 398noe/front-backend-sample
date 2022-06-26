@@ -1,4 +1,4 @@
-import { Box, FormControl, FormLabel, Input, Stack, Button, useColorModeValue, Alert, AlertIcon, AlertTitle, Center, Heading } from '@chakra-ui/react';
+import { Box, Input, Stack, Button, useColorModeValue, Alert, AlertIcon, AlertTitle, Center, Heading } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
@@ -62,6 +62,14 @@ const Login: React.FC = () => {
                                 <AlertTitle>IDが正しくありません</AlertTitle>
                             </Alert>
                         ) : (<></>)
+                    }
+                                        {
+                        (errors.id) && (
+                            <Alert status='error' maxW={"270px"}>
+                                <AlertIcon />
+                                <AlertTitle>IDを入力してください</AlertTitle>
+                            </Alert>
+                        )
                     }
                     <Input isRequired={true} variant="flushed" placeholder="ID"
                         {...register("id", { required: true })}
