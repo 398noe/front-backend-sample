@@ -1,5 +1,6 @@
-import { Avatar, Image, Text, Box, Button, Center, Flex, FormControl, FormLabel, Input, useColorModeValue, Heading, Stack, InputGroup, InputRightAddon, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, useEditableControls } from "@chakra-ui/react";
+import { Avatar, Image, Box, Button, Center, Flex, Input, useColorModeValue, Heading, Stack, InputGroup, InputRightAddon, NumberInput, NumberInputField, IconButton } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { FaSave } from "react-icons/fa";
 
 import { useForm } from "react-hook-form";
 
@@ -134,7 +135,7 @@ const UserCard: React.FC = () => {
                         }}
                         onClick={saveEditing}
                     >
-                        {editing ? "保存する" : "編集する"}
+                        {editing ? `${<IconButton icon={<FaSave />} aria-label={"Save"}/>}保存する` : "編集する"}
                     </Button>
                 </Box>
             </Box>
