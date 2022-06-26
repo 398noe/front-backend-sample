@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@aspida/axios": "^1.10.2",
+    "@chakra-ui/icons": "^2.0.2",
     "@chakra-ui/react": "^2.2.1",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
@@ -18,6 +19,7 @@
     "react-hook-form": "^7.33.0",
     "react-icons": "^4.4.0",
     "react-scripts": "5.0.1",
+    "recoil": "^0.7.4",
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
   },
@@ -47,8 +49,8 @@
     ]
   },
   "devDependencies": {
-    "@types/md5": "^2.3.2",
     "@types/jest": "^27.5.2",
+    "@types/md5": "^2.3.2",
     "@types/node": "^16.11.41",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5"
