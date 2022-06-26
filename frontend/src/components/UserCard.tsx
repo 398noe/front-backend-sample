@@ -1,5 +1,5 @@
 import { Avatar, Image, Box, Button, Center, Flex, Input, useColorModeValue, Heading, Stack, InputGroup, InputRightAddon, NumberInput, NumberInputField, IconButton } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSave } from "react-icons/fa";
 
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { UserData } from "../types";
 
 import userBG from "../images/userBackground.jpg";
+import { calcMD5 } from "../util/calcMD5";
 
 const UserCard: React.FC = () => {
     const [editing, setEditing] = useState(false);
@@ -16,6 +17,8 @@ const UserCard: React.FC = () => {
         age: 21,
         email: "info@example.com"
     });
+
+    const [gravatarEmail, setGravatarEmail] = useState(userData.email);
 
     const {
         register,
@@ -49,6 +52,7 @@ const UserCard: React.FC = () => {
             console.log("Save to DB");
 
         }
+        setGravatarEmail(userData.email)
         // 保存状態を反転
         setEditing(!editing);
     }
@@ -73,7 +77,7 @@ const UserCard: React.FC = () => {
                     <Avatar
                         size={'xl'}
                         src={
-                            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
+                            'https://www.gravatar.com/avatar/' + calcMD5(gravatarEmail)
                         }
                         css={{
                             border: '2px solid white',
@@ -85,7 +89,6 @@ const UserCard: React.FC = () => {
                         <Stack spacing={4} align={'center'} mb={5}>
                             <Input variant="flushed"  placeholder="ユーザ名"
                                 {...register("name", { required: true, maxLength: 20 })}
-                                defaultValue={userData.name}
                                 value={userData.name}
                                 onChange={handleName}
                             />
@@ -94,7 +97,6 @@ const UserCard: React.FC = () => {
                                     variant={"flushed"}
                                     {...register("age", { required: true })}
                                     step={1} min={0} max={100}
-                                    defaultValue={userData.age}
                                     value={userData.age}
                                     onChange={handleAge}
                                 >
@@ -105,7 +107,6 @@ const UserCard: React.FC = () => {
                             </InputGroup>
                             <Input variant="flushed" type={"email"} placeholder="メールアドレス"
                                 {...register("email", { required: true, maxLength: 50 })}
-                                defaultValue={userData.email}
                                 value={userData.email}
                                 onChange={handleEmail}
                             />
@@ -135,7 +136,7 @@ const UserCard: React.FC = () => {
                         }}
                         onClick={saveEditing}
                     >
-                        {editing ? `${<IconButton icon={<FaSave />} aria-label={"Save"}/>}保存する` : "編集する"}
+                        {editing ? "保存する" : "編集する"}
                     </Button>
                 </Box>
             </Box>
