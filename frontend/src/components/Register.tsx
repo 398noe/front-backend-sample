@@ -53,7 +53,7 @@ const Login: React.FC = () => {
             setIsError(false);
             // UserDataにデータを渡す
             setUserData(res.body.data);
-            console.log(res.body.data)
+            console.log(res.body.data);
         } catch (error) {
             setIsError(true);
         }

@@ -1,21 +1,20 @@
 import { Avatar, Image, Box, Button, Center, Flex, Input, useColorModeValue, Heading, Stack, InputGroup, InputRightAddon, NumberInput, NumberInputField } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-
 import { useForm } from "react-hook-form";
-
 import { UserData } from "../types";
-
 import userBG from "../images/userBackground.jpg";
 import { calcMD5 } from "../util/calcMD5";
 import { useRecoilState } from "recoil";
 import { userDataState } from "../atom/userData";
+import axios from "axios";
+import aspida from "@aspida/axios";
+import api from "../api/$api";
 
 const UserCard: React.FC = () => {
     const [editing, setEditing] = useState(false);
-
     const [userData, setUserData] = useRecoilState(userDataState);
-
     const [gravatarEmail, setGravatarEmail] = useState(userData.email);
+    const [isError, setIsError] = useState<boolean>(false);
 
     const {
         register,
@@ -40,10 +39,33 @@ const UserCard: React.FC = () => {
     const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserData({ ...userData, email: event.target.value });
     }
+    // aspida
+    const client = api(aspida(axios, { baseURL: "http://localhost:8000/api" }));
+
+    const changeUserData = async () => {
+        try {
+            // データ登録
+            const res = await client.user.post({
+                body: {
+                    id: userData.id,
+                    name: userData.name,
+                    age: userData.age,
+                    email: userData.email
+                }
+            });
+            // エラー状態を解除
+            setIsError(false);
+            // UserDataにデータを渡す
+            setUserData(res.body.data);
+            console.log(res.body.data);
+        } catch (error) {
+            setIsError(true);
+        }
+    }
 
     useEffect(() => {
         setGravatarEmail(userData.email)
-    },[userData.email]);
+    }, [userData.email]);
 
     const saveEditing = () => {
         /**
@@ -51,11 +73,16 @@ const UserCard: React.FC = () => {
          */
         if (editing) {
             console.log("Save to DB");
-
+            try {
+                changeUserData();
+                setGravatarEmail(userData.email);
+                setEditing(false);                   
+            } catch (error) {
+                // エラーが発生した場合編集画面から遷移させない
+            }
+        } else {
+            setEditing(true);
         }
-        setGravatarEmail(userData.email)
-        // 保存状態を反転
-        setEditing(!editing);
     }
 
     return (
