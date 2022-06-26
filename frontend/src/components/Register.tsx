@@ -1,4 +1,4 @@
-import { Flex, Box, FormControl, FormLabel, Input, Stack, Button, useColorModeValue, Alert, AlertIcon, AlertTitle, InputGroup, InputRightAddon, NumberInput, NumberInputField, Heading, Center } from '@chakra-ui/react';
+import { Box, Input, Stack, Button, useColorModeValue, Alert, AlertIcon, AlertTitle, InputGroup, InputRightAddon, NumberInput, NumberInputField, Heading, Center } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
@@ -12,9 +12,7 @@ const Login: React.FC = () => {
     const [id, setId] = useState<string>("");
     const [userData, setUserData] = useRecoilState(userDataState);
     const [isError, setIsError] = useState<boolean>(false);
-    const handleId = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setId(event.target.value);
-    }
+
     const {
         register,
         handleSubmit,
