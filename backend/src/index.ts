@@ -1,11 +1,16 @@
 // Import express from module
 import express, { Request, Response, NextFunction } from "express";
+import cors from "cors";
 import { userRouter } from "./routers/userRouter";
 import { rootRouter } from "./routers/rootRouter";
 
 class Server {
     private app: express.Application;
     private port: string = process.env.PORT || "8000";
+    private allowedOrigins = ["http://localhost:3000"];
+    private corsOptions: cors.CorsOptions = {
+        origin: this.allowedOrigins
+    };
 
     constructor(port: string) {
         this.app = express();
@@ -16,6 +21,7 @@ class Server {
 
     // middlewares
     middlewares(): void {
+        this.app.use(cors(this.corsOptions));
         this.app.use(express.urlencoded({
             extended: true
         }));
