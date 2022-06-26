@@ -1,6 +1,5 @@
-import { Avatar, Image, Box, Button, Center, Flex, Input, useColorModeValue, Heading, Stack, InputGroup, InputRightAddon, NumberInput, NumberInputField, IconButton } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { FaSave } from "react-icons/fa";
+import { Avatar, Image, Box, Button, Center, Flex, Input, useColorModeValue, Heading, Stack, InputGroup, InputRightAddon, NumberInput, NumberInputField } from "@chakra-ui/react";
+import React, { useState } from "react";
 
 import { useForm } from "react-hook-form";
 
@@ -8,15 +7,13 @@ import { UserData } from "../types";
 
 import userBG from "../images/userBackground.jpg";
 import { calcMD5 } from "../util/calcMD5";
+import { useRecoilState } from "recoil";
+import { userDataState } from "../atom/userData";
 
 const UserCard: React.FC = () => {
     const [editing, setEditing] = useState(false);
 
-    const [userData, setUserData] = useState<UserData>({
-        name: "ユーザ名",
-        age: 21,
-        email: "info@example.com"
-    });
+    const [userData, setUserData] = useRecoilState(userDataState);
 
     const [gravatarEmail, setGravatarEmail] = useState(userData.email);
 
