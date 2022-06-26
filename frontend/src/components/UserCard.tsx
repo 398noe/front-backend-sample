@@ -1,4 +1,4 @@
-import { Avatar, Image, Text, Box, Button, Center, Flex, FormControl, FormLabel, Input, useColorModeValue, Heading, Stack, InputGroup, InputRightAddon, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper } from "@chakra-ui/react";
+import { Avatar, Image, Text, Box, Button, Center, Flex, FormControl, FormLabel, Input, useColorModeValue, Heading, Stack, InputGroup, InputRightAddon, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, useEditableControls } from "@chakra-ui/react";
 import React, { useState } from "react";
 
 import { useForm } from "react-hook-form";
@@ -22,9 +22,9 @@ const UserCard: React.FC = () => {
         formState: { errors }
     } = useForm({
         defaultValues: {
-            name: "",
-            age: "",
-            email: ""
+            name: userData.name,
+            age: userData.age,
+            email: userData.email
         }
     });
 
@@ -82,7 +82,7 @@ const UserCard: React.FC = () => {
                 <Box p={6}>
                     {editing ? (
                         <Stack spacing={4} align={'center'} mb={5}>
-                            <Input variant="flushed" type={"text"} placeholder="ユーザ名"
+                            <Input variant="flushed"  placeholder="ユーザ名"
                                 {...register("name", { required: true, maxLength: 20 })}
                                 defaultValue={userData.name}
                                 value={userData.name}
